@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { createUser } from '../services/userAPI';
 import { Redirect } from 'react-router';
+import { createUser } from '../services/userAPI';
 import Loading from '../Loading';
 
 class Login extends Component {
@@ -18,7 +18,7 @@ class Login extends Component {
 
   // logica do event do botão
   onInputUserChange = (event) => {
-    // console.log({ event });
+    // console.log('Estou capturando o input!!');
     const { value } = event.target;
     this.setState({
       userLogin: value,
@@ -28,16 +28,6 @@ class Login extends Component {
     });
   }
 
-  onLoginButtonCLick = (event) => {
-    event.preventDefault();
-    // console.log('O botão está funcionando!') --> não aparece!!;
-    const { userLogin } = this.state;
-    this.setState({ loginButtonClicked: true });
-    // captura o state, ou seja, o valor no input e chama a API
-    createUser({ name: userLogin })
-      .then(() => this.setState({ loading: false }));
-  }
-
   buttonValidationOnInput= () => {
     // checa o input no campo do user e valida, liberando o botao
     const { userLogin } = this.state;
@@ -45,11 +35,28 @@ class Login extends Component {
     const inputControl = 3;
     if (userLogin.length >= inputControl) {
       // lembra que eventos alteram o STATE!!!
-      this.setState({ isButtonDisabled: false });
+      return this.setState({ isButtonDisabled: false });
       // Erro de unused associado a falta do state dentro do render e no filho!!
-    } else {
-      this.setState({ isButtonDisabled: true });
-    }
+    } return this.setState({ isButtonDisabled: true });
+  }
+
+  onLoginButtonCLick = () => {
+    // event.preventDefault();
+    // console.log('O botão está funcionando!');
+    const {
+      userLogin,
+      // loading,
+      // isButtonDisabled,
+      // loginButtonClicked,
+    } = this.state;
+
+    this.setState({
+      loginButtonClicked: true,
+    });
+    const userName = { name: userLogin };
+    // captura o state, ou seja, o valor no input e chama a API
+    createUser(userName)
+      .then(() => this.setState({ loading: true }));
   }
 
   redirectValidation = () => {
@@ -61,31 +68,36 @@ class Login extends Component {
   render() {
     const {
       isButtonDisabled,
-      onInputUserChange,
-      onLoginButtonCLick,
-      // userLogin,
+      loginButtonClicked,
     } = this.state;
+
     return (
-      <div data-testid="page-login">
-        <form>
-          <input
-            data-testid="login-name-input"
-            type="text"
-            name="userLogin"
-            // value={ userLogin }
-            placeholder="User name"
-            onChange={ onInputUserChange }
-          />
-          <button
-            type="submit"
-            data-testid="login-submit-button"
-            onClick={ onLoginButtonCLick }
-            disabled={ isButtonDisabled }
-          >
-            Entrar
-          </button>
-        </form>
-      </div>
+      loginButtonClicked
+        ? this.redirectValidation()
+        : (
+          <div data-testid="page-login">
+            <form>
+              <label htmlFor="login-name-input">
+                <input
+                  data-testid="login-name-input"
+                  type="text"
+                  name="userLogin"
+                  placeholder="User name"
+                  // isso nao é state! estava sendo passado sem o this
+                  onChange={ this.onInputUserChange }
+                />
+              </label>
+              <button
+                type="submit"
+                data-testid="login-submit-button"
+                onClick={ this.onLoginButtonCLick }
+                disabled={ isButtonDisabled }
+              >
+                Entrar
+              </button>
+            </form>
+          </div>
+        )
     );
   }
 }
