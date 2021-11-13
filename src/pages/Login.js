@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { createUser } from '../services/userAPI';
+import { Redirect } from 'react-router';
+import Loading from '../Loading';
 
 class Login extends Component {
   constructor() {
@@ -10,29 +12,36 @@ class Login extends Component {
       userLogin: '',
       loading: false,
       isButtonDisabled: true,
+      loginButtonClicked: false,
     };
   }
 
   // logica do event do botão
-
-  onInputUserChange = ({ target }) => {
-    console.log({ target });
+  onInputUserChange = (event) => {
+    // console.log({ event });
+    const { value } = event.target;
     this.setState({
       userLogin: value,
+      // chamar a validação como callback
+    }, () => {
+      this.buttonValidationOnInput();
     });
   }
 
   onLoginButtonCLick = (event) => {
     event.preventDefault();
-    console.log('O botão está funcionando!');
+    // console.log('O botão está funcionando!');
     const { userLogin } = this.state;
+    this.setState({ loginButtonClicked: true });
     // captura o state, ou seja, o valor no input e chama a API
-    createUser({ name: userLogin });
+    createUser({ name: userLogin })
+      .then(() => this.setState({ loading: false }));
   }
 
   buttonValidationOnInput= () => {
     // checa o input no campo do user e valida, liberando o botao
     const { userLogin } = this.state;
+    // console.log(userLogin);
     const inputControl = 3;
     if (userLogin.length >= inputControl) {
       // lembra que eventos alteram o STATE!!!
@@ -43,15 +52,18 @@ class Login extends Component {
     }
   }
 
-  // logica do asyn?
+  redirectValidation = () => {
+    const { loading } = this.state;
+    if (loading) return <Redirect to="/search" />;
+    return <Loading />;
+  }
 
   render() {
     const {
       isButtonDisabled,
-      buttonValidationOnInput,
       onInputUserChange,
       onLoginButtonCLick,
-      userLogin,
+      // userLogin,
     } = this.state;
     return (
       <div data-testid="page-login">
@@ -60,8 +72,7 @@ class Login extends Component {
             data-testid="login-name-input"
             type="text"
             name="userLogin"
-            id="userLogin"
-            value={ userLogin }
+            // value={ userLogin }
             placeholder="User name"
             onChange={ onInputUserChange }
           />
@@ -69,7 +80,7 @@ class Login extends Component {
             type="submit"
             data-testid="login-submit-button"
             onClick={ onLoginButtonCLick }
-            disable={ isButtonDisabled }
+            disabled={ isButtonDisabled }
           >
             Entrar
           </button>
