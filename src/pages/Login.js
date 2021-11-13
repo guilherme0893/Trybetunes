@@ -30,7 +30,7 @@ class Login extends Component {
 
   onLoginButtonCLick = (event) => {
     event.preventDefault();
-    // console.log('O botão está funcionando!');
+    // console.log('O botão está funcionando!') --> não aparece!! ;
     const { userLogin } = this.state;
     this.setState({ loginButtonClicked: true });
     // captura o state, ou seja, o valor no input e chama a API
