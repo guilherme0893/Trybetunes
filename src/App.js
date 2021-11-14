@@ -9,6 +9,7 @@ import { BrowserRouter } from 'react-router-dom';
 // import NotFound from './pages/NotFound';
 import Routes from './components/Route';
 // first commit
+// commit testando o avaliador --> tem de passar 02!
 
 class App extends React.Component {
   render() {
