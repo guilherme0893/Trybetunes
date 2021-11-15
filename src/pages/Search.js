@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Header from '../components/Header';
+import searchAlbumsAPI from '../services/searchAlbumsAPI';
 
 class Search extends Component {
   constructor() {
@@ -7,6 +8,8 @@ class Search extends Component {
     this.state = {
       searchInput: '',
       isButtonDisabled: true,
+      searchButtonClick: false,
+      loading: false,
     };
   }
 
@@ -28,11 +31,24 @@ class Search extends Component {
     } return this.setState({ isButtonDisabled: true });
   }
 
+  onSearchButtonClick = async () => {
+    const { searchInput } = this.state;
+    this.setState({
+      searchButtonClick: true,
+      searchInput: '',
+    });
+    // pelo que entendi, o parametro que é o state é transformado 
+    // no artisto que é buscado dentro de um template literals
+    searchAlbumsAPI(searchInput)
+      .then(() => this.setState({ loading: true }));
+  }
+
   render() {
     const {
       // dava errado porque a função é uma prop, não um state!!!
       // onInputSearch,
       isButtonDisabled,
+      searchButtonClick,
     } = this.state;
     return (
       <div data-testid="page-search">
