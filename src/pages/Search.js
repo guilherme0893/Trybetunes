@@ -10,6 +10,7 @@ class Search extends Component {
       isButtonDisabled: true,
       searchButtonClick: false,
       loading: false,
+      searchSuccessful: false,
     };
   }
 
@@ -33,14 +34,24 @@ class Search extends Component {
 
   onSearchButtonClick = async () => {
     const { searchInput } = this.state;
-    this.setState({
-      searchButtonClick: true,
-      searchInput: '',
-    });
-    // pelo que entendi, o parametro que é o state é transformado 
+    // this.setState({
+    //   searchButtonClick: true,
+    //   searchInput: '',
+    // });
+    // pelo que entendi, o parametro que é o state é transformado
     // no artisto que é buscado dentro de um template literals
-    searchAlbumsAPI(searchInput)
-      .then(() => this.setState({ loading: true }));
+    // --> isso é async-await, pode dar certo ou errado --> check!
+    const searchAlbumResponse = await searchAlbumsAPI(searchInput);
+    if (searchAlbumResponse.length > 0 || searchAlbumResponse !== undefined) {
+      return this.setState({ searchSuccessful: true, searchInput: '' });
+    } this.setState({ searchSuccessful: false });
+  }
+
+  onSearchResult = () => {
+    const { searchSuccessful, searchInput } = this.state;
+    if (searchSuccessful === true) {
+      return <span>{`Resultado de ${searchInput}`}</span>;
+    } return <span>Nenhum álbum foi encontrado</span>;
   }
 
   render() {
