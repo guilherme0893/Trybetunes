@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
-import { getUser } from '../services/userAPI';
+// import { getUser } from '../services/userAPI';
 
 class Header extends Component {
   // constructor() {
   //   super();
   //   this.state = {
+  //     userName: '',
+  //     loading: false,
   //   };
   // }
 
+  // // ao carregar o componenet no state 'zero'
   // componentDidMount() {
   //   this.getUser();
   // }
