@@ -8,8 +8,8 @@ class Search extends Component {
     this.state = {
       searchInput: '',
       isButtonDisabled: true,
-      searchButtonClick: false,
-      loading: false,
+      // searchButtonClick: false,
+      // loading: false,
       searchSuccessful: false,
     };
   }
@@ -59,7 +59,7 @@ class Search extends Component {
       // dava errado porque a função é uma prop, não um state!!!
       // onInputSearch,
       isButtonDisabled,
-      searchButtonClick,
+      onSearchButtonClick,
     } = this.state;
     return (
       <div data-testid="page-search">
@@ -80,7 +80,7 @@ class Search extends Component {
             type="submit"
             data-testid="search-artist-button"
             disabled={ isButtonDisabled }
-            // onClick="{}"
+            onClick={ onSearchButtonClick }
           >
             Pesquisar
           </button>
