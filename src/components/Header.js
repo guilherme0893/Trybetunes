@@ -1,26 +1,41 @@
 import React, { Component } from 'react';
-// import { getUser } from '../services/userAPI';
+import { getUser } from '../services/userAPI';
+import Loading from '../Loading';
 
 class Header extends Component {
-  // constructor() {
-  //   super();
-  //   this.state = {
-  //     userName: '',
-  //     loading: false,
-  //   };
-  // }
+  constructor() {
+    super();
+    this.state = {
+      userName: '',
+      loading: false,
+    };
+  }
 
-  // // ao carregar o componenet no state 'zero'
-  // componentDidMount() {
-  //   this.getUser();
-  // }
+  // ao carregar o componenet no state 'zero'
+  componentDidMount() {
+    this.getUser();
+  }
+
+  getUser = () => {
+    // o getUser original vem de API, logo é um async
+    getUser()
+    // lembrar que retorna um objeto
+      .then((name) => this.setState({
+        userName: name.name,
+        loading: true,
+      }));
+  }
 
   render() {
+    const {
+      userName,
+      loading,
+    } = this.state;
     return (
       <header data-testid="header-component">
-        <h1 data-testid="header-user-name">
-          Hello, UserName!
-        </h1>
+        { loading
+          ? <h1 data-testid="header-user-name">{`Welcome, ${userName}!`}</h1>
+          : <Loading />}
       </header>
     );
   }
