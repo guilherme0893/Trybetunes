@@ -20,6 +20,9 @@ class Search extends Component {
       albumsReturned: [],
       // mensagem a ser mostrada caso dẽ falha
       searchAnswer: '',
+      // seguindo a tread do João Melo, onde o João Oliveira Avellino
+      // indicou criar um novo state para receber o que recebia o input
+      searchInputValue: '',
     };
   }
 
@@ -30,6 +33,9 @@ class Search extends Component {
     this.setState({
       searchInput: value,
     }, () => {
+      this.setState({
+        searchInputValue: value,
+      });
       this.validateButtonSearch();
     });
   }
@@ -48,17 +54,18 @@ class Search extends Component {
     event.preventDefault();
     // console.log(event.target.type);
     // console.log('estou funcionando!');
-    const { searchInput } = this.state;
+    const { searchInputValue } = this.state;
     // console.log(searchInput) --> ok
     this.setState({
       searchButtonClick: true,
-      searchInput: '',
+      searchInputValue: '',
     }, () => {
       // pelo que entendi, o parametro que é o state é transformado
       // no artisto que é buscado dentro de um template literals
       // --> isso é async-await, pode dar certo ou errado --> check!
       // const searchAlbumResponse = await
-      searchAlbumsAPI(searchInput)
+      searchAlbumsAPI(searchInputValue)
+        // .then(console.log('Estou funcionando!')) -- ok!
         .then((searchAlbumResponse) => {
           this.setState({
             albumsReturned: [...searchAlbumResponse],
@@ -70,6 +77,8 @@ class Search extends Component {
             // estava chamando a função errada
             this.onSearchResult();
           });
+          // console.log(searchAlbumResponse) --> ok
+          // joguei beatles e o artistId e name são iguais -- ok
         });
     });
   }
@@ -77,20 +86,20 @@ class Search extends Component {
   onSearchResult = () => {
     const {
       // searchSuccessful,
-      searchInput,
+      // searchInput,
       albumsReturned,
+      searchInputValue,
       // searchAnswer,
     } = this.state;
     if (albumsReturned.length > 0) {
       this.setState({
-        searchAnswer: `Resultado de ${searchInput}`,
+        searchAnswer: `Resultado de ${searchInputValue}`,
       });
     } else {
       this.setState({
         searchAnswer: 'Nenhum álbum foi encontrado',
       });
     }
-    // console.log(searchAnswer) --> funcionando OK!;
   }
 
   render() {
@@ -103,6 +112,7 @@ class Search extends Component {
       searchButtonClick,
       // searchResult,
       searchSuccessful,
+      // searchInputValue,
     } = this.state;
     return (
       <div>
@@ -137,12 +147,12 @@ class Search extends Component {
           { searchSuccessful ? (
             <>
               { albumsReturned.map((album) => (
-                <ul key={ album.collectionName }>
+                <ul key={ album.collectionId }>
                   <Link
-                    data-testid={ `link-to-album-${collectionId}` }
-                    to={ `album/${collectionId}` }
+                    data-testid={ `link-to-album-${album.collectionId}` }
+                    to={ `album/${album.collectionId}` }
                   >
-                    <img src={ album.artworkUrl100 } alt={ collectionName } />
+                    <img src={ album.artworkUrl100 } alt={ album.collectionName } />
                     <li>{ album.collectionName }</li>
                   </Link>
                 </ul>
