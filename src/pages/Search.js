@@ -86,14 +86,15 @@ class Search extends Component {
   onSearchResult = () => {
     const {
       // searchSuccessful,
-      // searchInput,
+      searchInput,
       albumsReturned,
-      searchInputValue,
+      // searchInputValue,
       // searchAnswer,
     } = this.state;
     if (albumsReturned.length > 0) {
       this.setState({
-        searchAnswer: `Resultado de ${searchInputValue}`,
+        // lenbrar que o searchInputValue é zerado acima!!
+        searchAnswer: `Resultado de álbuns de: ${searchInput}`,
       });
     } else {
       this.setState({
@@ -146,6 +147,7 @@ class Search extends Component {
         <div>
           { searchSuccessful ? (
             <>
+              <span>{ searchAnswer }</span>
               { albumsReturned.map((album) => (
                 <ul key={ album.collectionId }>
                   <Link
