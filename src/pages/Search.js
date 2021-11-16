@@ -8,9 +8,16 @@ class Search extends Component {
     this.state = {
       searchInput: '',
       isButtonDisabled: true,
-      // searchButtonClick: false,
+      searchButtonClick: false,
       // loading: false,
+      // resultado da api muda o state - false não mostra
       searchSuccessful: false,
+      // resposta renderizada da api muda o state
+      searchResult: '',
+      // os albuns sao retornadas num array de objetos
+      albumsReturned: [],
+      // mensagem a ser mostrada caso dẽ falha
+      searchAnswer: '',
     };
   }
 
@@ -32,26 +39,46 @@ class Search extends Component {
     } return this.setState({ isButtonDisabled: true });
   }
 
-  onSearchButtonClick = async () => {
+  onSearchButtonClick = () => {
     const { searchInput } = this.state;
-    // this.setState({
-    //   searchButtonClick: true,
-    //   searchInput: '',
-    // });
-    // pelo que entendi, o parametro que é o state é transformado
-    // no artisto que é buscado dentro de um template literals
-    // --> isso é async-await, pode dar certo ou errado --> check!
-    const searchAlbumResponse = await searchAlbumsAPI(searchInput);
-    if (searchAlbumResponse.length > 0 || searchAlbumResponse !== undefined) {
-      return this.setState({ searchSuccessful: true, searchInput: '' });
-    } this.setState({ searchSuccessful: false });
+    this.setState({
+      searchButtonClick: true,
+      searchInput: '',
+    }, () => {
+      // pelo que entendi, o parametro que é o state é transformado
+      // no artisto que é buscado dentro de um template literals
+      // --> isso é async-await, pode dar certo ou errado --> check!
+      // const searchAlbumResponse = await
+      searchAlbumsAPI(searchInput)
+        .then((searchAlbumResponse) => {
+          this.setState({
+            albumsReturned: [...searchAlbumResponse],
+          });
+          this.setState({
+            searchSuccessful: true,
+            searchButtonClick: false,
+          }, () => {
+            this.onInputSearch();
+          });
+        });
+    });
   }
 
   onSearchResult = () => {
-    const { searchSuccessful, searchInput } = this.state;
-    if (searchSuccessful === true) {
-      return <span>{`Resultado de ${searchInput}`}</span>;
-    } return <span>Nenhum álbum foi encontrado</span>;
+    const {
+      searchSuccessful,
+      searchInput,
+      albumsReturned,
+    } = this.state;
+    if (searchSuccessful === true && albumsReturned.length > 0 ) {
+      this.setState({
+        searchAnswer: `Resultado de ${searchInput}`,
+      });
+    } else {
+      this.setState({
+        searchAnswer: 'Nenhum álbum foi encontrado',
+      });
+    }
   }
 
   render() {
@@ -60,6 +87,9 @@ class Search extends Component {
       // onInputSearch,
       isButtonDisabled,
       onSearchButtonClick,
+      searchAnswer,
+      albumsReturned,
+      searchButtonClick,
     } = this.state;
     return (
       <div data-testid="page-search">
