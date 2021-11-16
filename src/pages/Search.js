@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
+import Loading from '../Loading';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
 
 class Search extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       searchInput: '',
       isButtonDisabled: true,
@@ -13,7 +15,7 @@ class Search extends Component {
       // resultado da api muda o state - false não mostra
       searchSuccessful: false,
       // resposta renderizada da api muda o state
-      searchResult: '',
+      // searchResult: '',
       // os albuns sao retornadas num array de objetos
       albumsReturned: [],
       // mensagem a ser mostrada caso dẽ falha
@@ -23,6 +25,8 @@ class Search extends Component {
 
   onInputSearch = (event) => {
     const { value } = event.target;
+    // console.log(value);
+    // console.log(event);
     this.setState({
       searchInput: value,
     }, () => {
@@ -34,13 +38,18 @@ class Search extends Component {
     const { searchInput } = this.state;
     const inputControl = 2;
     if (searchInput.length >= inputControl) {
-      // console.log('funcionando!!');
+      // console.log('funcionando!!'); -> ok;
       return this.setState({ isButtonDisabled: false });
     } return this.setState({ isButtonDisabled: true });
   }
 
-  onSearchButtonClick = () => {
+  onSearchButtonClick = (event) => {
+    // tava faltando essa cara aqui! e acho que no login tb!!
+    event.preventDefault();
+    // console.log(event.target.type);
+    // console.log('estou funcionando!');
     const { searchInput } = this.state;
+    // console.log(searchInput) --> ok
     this.setState({
       searchButtonClick: true,
       searchInput: '',
@@ -58,7 +67,8 @@ class Search extends Component {
             searchSuccessful: true,
             searchButtonClick: false,
           }, () => {
-            this.onInputSearch();
+            // estava chamando a função errada
+            this.onSearchResult();
           });
         });
     });
@@ -66,11 +76,12 @@ class Search extends Component {
 
   onSearchResult = () => {
     const {
-      searchSuccessful,
+      // searchSuccessful,
       searchInput,
       albumsReturned,
+      // searchAnswer,
     } = this.state;
-    if (searchSuccessful === true && albumsReturned.length > 0 ) {
+    if (albumsReturned.length > 0) {
       this.setState({
         searchAnswer: `Resultado de ${searchInput}`,
       });
@@ -79,6 +90,7 @@ class Search extends Component {
         searchAnswer: 'Nenhum álbum foi encontrado',
       });
     }
+    // console.log(searchAnswer) --> funcionando OK!;
   }
 
   render() {
@@ -86,35 +98,59 @@ class Search extends Component {
       // dava errado porque a função é uma prop, não um state!!!
       // onInputSearch,
       isButtonDisabled,
-      onSearchButtonClick,
       searchAnswer,
       albumsReturned,
       searchButtonClick,
+      // searchResult,
+      searchSuccessful,
     } = this.state;
     return (
-      <div data-testid="page-search">
-        Search
-        <Header />
-        <form>
-          <label htmlFor="search-artist-input">
-            <input
-              id="search-artist-input"
-              data-testid="search-artist-input"
-              type="search"
-              placeholder="Name of artist"
-              name="search-artist-input"
-              onChange={ this.onInputSearch }
-            />
-          </label>
-          <button
-            type="submit"
-            data-testid="search-artist-button"
-            disabled={ isButtonDisabled }
-            onClick={ onSearchButtonClick }
-          >
-            Pesquisar
-          </button>
-        </form>
+      <div>
+        <div data-testid="page-search">
+          Search
+          <Header />
+          { searchButtonClick ? (
+            <Loading />
+          ) : (
+            <form>
+              <label htmlFor="search-artist-input">
+                <input
+                  id="search-artist-input"
+                  data-testid="search-artist-input"
+                  type="search"
+                  placeholder="Name of artist"
+                  name="search-artist-input"
+                  onChange={ this.onInputSearch }
+                />
+              </label>
+              <button
+                type="submit"
+                data-testid="search-artist-button"
+                disabled={ isButtonDisabled }
+                onClick={ this.onSearchButtonClick }
+              >
+                Pesquisar
+              </button>
+            </form>)}
+        </div>
+        <div>
+          { searchSuccessful ? (
+            <>
+              { albumsReturned.map((album) => (
+                <ul key={ album.collectionName }>
+                  <Link
+                    data-testid={ `link-to-album-${collectionId}` }
+                    to={ `album/${collectionId}` }
+                  >
+                    <img src={ album.artworkUrl100 } alt={ collectionName } />
+                    <li>{ album.collectionName }</li>
+                  </Link>
+                </ul>
+              )) }
+            </>
+          )
+            : <span>{ searchAnswer }</span> }
+        </div>
       </div>
     );
   }
