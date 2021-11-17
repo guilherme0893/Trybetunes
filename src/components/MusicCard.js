@@ -4,14 +4,12 @@ import PropTypes from 'prop-types';
 
 class MusicCard extends Component {
   render() {
-    const { trackName } = this.props;
+    const { trackName, previewUrl } = this.props;
     console.log(trackName);
     return (
       <div>
         <span>{ trackName }</span>
-        <audio
-          data-testid="audio-component" controls>
-          {/* src={ previewUrl } o src ta quebrando o codigo!! */}
+        <audio data-testid="audio-component" src={ previewUrl } controls>
           <track kind="captions" />
           O seu navegador não suporta o elemento
           <code>audio</code>
@@ -24,6 +22,7 @@ class MusicCard extends Component {
 
 MusicCard.propTypes = {
   trackName: PropTypes.string.isRequired,
+  previewUrl: PropTypes.string.isRequired,
 };
 
 export default MusicCard;

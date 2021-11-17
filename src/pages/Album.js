@@ -21,9 +21,9 @@ class Album extends Component {
       // artistId: '',
       artistName: '',
       // collectionId: '',
-      // collectionName: '',
+      collectionName: '',
       // collectionPrice: '',
-      // artworkUrl100: '',
+      artworkUrl100: '',
       // releaseDate: '',
       // trackCount: '',
       songs: [],
@@ -68,6 +68,7 @@ class Album extends Component {
       artistName,
       collectionName,
       songs,
+      artworkUrl100,
     } = this.state;
     // console.log('estou acima das songs!');
     // console.log(songs);
@@ -78,6 +79,7 @@ class Album extends Component {
         Album
         <Header />
         <div>
+          <img src={ artworkUrl100 } alt={ collectionName } />
           <span data-testid="album-name">{ collectionName }</span>
           <span data-testid="artist-name">{ artistName }</span>
           <div>
@@ -89,7 +91,7 @@ class Album extends Component {
                   <MusicCard
                     key={ song.trackId }
                     trackName={ song.trackName }
-                    src={ song.previewUrl }
+                    previewUrl={ song.previewUrl }
                   />)
             ))}
           </div>
