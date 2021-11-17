@@ -24,8 +24,8 @@ class MusicCard extends Component {
     getFavoriteSongs()
       .then((favorites) => {
       // só chamar as musicas com o checked true
-        console.log('sou a função de load dos favoritos!');
-        console.log(favorites);
+        // console.log('sou a função de load dos favoritos!');
+        // console.log(favorites);
         // trackId está no id e será como identifica a musica
         if (favorites.some((favorite) => favorite.trackId === trackId)) {
           this.setState({ isCheckBoxChecked: true });
@@ -35,6 +35,8 @@ class MusicCard extends Component {
 
   handleOnCheckBoxClick = () => {
     const { trackId } = this.props;
+    // funcionalidade de remover vai entrar aqui, mas agora é uma pausa
+    // chamar os states, checar se ta true ou false e aplicar a logica de mudança com setstate
     this.setState({
       isCheckBoxChecked: true,
       onCheckBoxClick: true,
