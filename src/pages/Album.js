@@ -28,6 +28,7 @@ class Album extends Component {
       // trackCount: '',
       songs: [],
       id,
+      // trackId: '',
     };
   }
 
@@ -69,6 +70,7 @@ class Album extends Component {
       collectionName,
       songs,
       artworkUrl100,
+      // trackId,
     } = this.state;
     // console.log('estou acima das songs!');
     // console.log(songs);
@@ -92,6 +94,7 @@ class Album extends Component {
                     key={ song.trackId }
                     trackName={ song.trackName }
                     previewUrl={ song.previewUrl }
+                    trackId={ song.trackId }
                   />)
             ))}
           </div>
