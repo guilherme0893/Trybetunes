@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 // import { Link } from 'react-router-dom';
 import Loading from '../Loading';
-import { addSong } from '../services/favoriteSongsAPI';
+import { addSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
 
 class MusicCard extends Component {
   constructor(props) {
@@ -11,6 +11,27 @@ class MusicCard extends Component {
       isCheckBoxChecked: false,
       onCheckBoxClick: false,
     };
+    // const {
+    //   trackId,
+    // } = this.props;
+  }
+
+  componentDidMount() {
+    this.loadFavoritesSongs();
+  }
+
+  loadFavoritesSongs = () => {
+    const { trackId } = this.props;
+    getFavoriteSongs()
+      .then((favorites) => {
+      // só chamar as musicas com o checked true
+        console.log('sou a função de load dos favoritos!');
+        console.log(favorites);
+        // trackId está no id e será como identifica a musica
+        if (favorites.some((favorite) => favorite.trackId === trackId)) {
+          this.setState({ isCheckBoxChecked: true });
+        }
+      });
   }
 
   handleOnCheckBoxClick = () => {
@@ -32,28 +53,31 @@ class MusicCard extends Component {
     const { isCheckBoxChecked, onCheckBoxClick } = this.state;
     console.log(trackName);
     return (
-      onCheckBoxClick
-        ? <Loading />
-        : (
-          <div>
-            <span>{ trackName }</span>
-            <audio data-testid="audio-component" src={ previewUrl } controls>
-              <track kind="captions" />
-              O seu navegador não suporta o elemento
-              <code>audio</code>
-              .
-            </audio>
-            <label htmlFor="trackId">
-              Favorita
-              <input
-                id={ trackId }
-                type="checkbox"
-                data-testid={ `checkbox-music-${trackId}` }
-                checked={ isCheckBoxChecked }
-                onChange={ this.handleOnCheckBoxClick }
-              />
-            </label>
-          </div>)
+      <div>
+        {onCheckBoxClick
+          ? (<Loading />)
+          : (
+            <div>
+              <span>{ trackName }</span>
+              <audio data-testid="audio-component" src={ previewUrl } controls>
+                <track kind="captions" />
+                O seu navegador não suporta o elemento
+                <code>audio</code>
+                .
+              </audio>
+              <label htmlFor="trackId">
+                Favorita
+                <input
+                  id={ trackId }
+                  type="checkbox"
+                  data-testid={ `checkbox-music-${trackId}` }
+                  checked={ isCheckBoxChecked }
+                  onChange={ this.handleOnCheckBoxClick }
+                />
+              </label>
+            </div>)}
+      </div>
+
     );
   }
 }
