@@ -4,8 +4,8 @@ import { createUser } from '../services/userAPI';
 import Loading from '../Loading';
 
 class Login extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       // state original ao carregar a page
       // é o nome do usuário e o que precisa ser capturado
@@ -66,6 +66,8 @@ class Login extends Component {
   }
 
   render() {
+    console.log('eu sou o login.js');
+    console.log(this.props);
     const {
       isButtonDisabled,
       loginButtonClicked,

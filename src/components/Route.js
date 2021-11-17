@@ -10,6 +10,8 @@ import NotFound from '../pages/NotFound';
 
 class Routes extends Component {
   render() {
+    // console.log('eu sou o routes');
+    // console.log(this.props);
     return (
       <div>
         {/* // switch carrega a primeira que acha, por isso o exact -- diferente de como estava antes no app */}

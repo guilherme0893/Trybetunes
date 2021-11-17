@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+// import { Link } from 'react-router-dom';
 
 class MusicCard extends Component {
-  // constructor() {
-  //   super(
-
-  //   );
-  // }
   render() {
+    const { trackName } = this.props;
+    console.log(trackName);
     return (
       <div>
-        <span data-testid="artist-name">Artist</span>
-        <span data-testid="album-name">Album</span>
-        <audio data-testid="audio-component" src={ previewUrl } controls>
+        <span>{ trackName }</span>
+        <audio
+          data-testid="audio-component" controls>
+          {/* src={ previewUrl } o src ta quebrando o codigo!! */}
           <track kind="captions" />
           O seu navegador não suporta o elemento
           <code>audio</code>
@@ -22,5 +21,9 @@ class MusicCard extends Component {
     );
   }
 }
+
+MusicCard.propTypes = {
+  trackName: PropTypes.string.isRequired,
+};
 
 export default MusicCard;

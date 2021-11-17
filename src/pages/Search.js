@@ -104,6 +104,8 @@ class Search extends Component {
   }
 
   render() {
+    console.log('eu sou o search.js');
+    console.log(this.props);
     const {
       // dava errado porque a função é uma prop, não um state!!!
       // onInputSearch,
