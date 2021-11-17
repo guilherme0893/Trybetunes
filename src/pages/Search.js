@@ -93,7 +93,7 @@ class Search extends Component {
     } = this.state;
     if (albumsReturned.length > 0) {
       this.setState({
-        // lenbrar que o searchInputValue é zerado acima!!
+        // lembrar que o searchInputValue é zerado acima!!
         searchAnswer: `Resultado de álbuns de: ${searchInput}`,
       });
     } else {
