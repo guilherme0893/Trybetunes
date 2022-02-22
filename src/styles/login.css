@@ -1,0 +1,28 @@
+.main-div {
+  border: 1px solid black;
+  width: fit-content;
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.main-title {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: xxx-large;
+  text-align: center;
+  padding: 25px;
+  border-bottom: 1px solid rgb(217, 218, 220);
+}
+
+.login-form {
+  align-items: center;
+  flex-direction: column;
+  /* box-shadow: rgba(0, 0, 0, 0.1) 0 4px 6px -1px , rgba(0, 0, 0, 0.06) 0 2px 4px -1px; */
+  padding: 50px;
+  border: 1px solid rgb(217, 218, 220)
+}
+
+.login-form > label {
+  margin-bottom: 1em;
+}
