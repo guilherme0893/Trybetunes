@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router';
 import { Button } from 'reactstrap';
+import Spinner from 'react-bootstrap/Spinner';
 import { createUser } from '../services/userAPI';
-import Loading from '../Loading';
+// import Loading from '../Loading';
+
 import '../styles/login.css';
 
 class Login extends Component {
@@ -49,7 +51,11 @@ class Login extends Component {
   redirectValidation = () => {
     const { loading } = this.state;
     if (loading) return <Redirect to="/search" />;
-    return <Loading />;
+    return (
+      <Spinner animation="border" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </Spinner>
+    );
   }
 
   render() {

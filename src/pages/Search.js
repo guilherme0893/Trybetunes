@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'reactstrap';
+import Spinner from 'react-bootstrap/Spinner';
 import Header from '../components/Header';
-import Loading from '../Loading';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
 
 class Search extends Component {
@@ -90,9 +90,11 @@ class Search extends Component {
         <div data-testid="page-search">
           <Header />
           {searchButtonClick ? (
-            <Loading />
+            <Spinner animation="border" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </Spinner>
           ) : (
-            <form style={ { margin: 'auto' } -}>
+            <form style={ { margin: 'auto' } }>
               <div
                 className="d-flex justify-content-center pt-4 pb-3"
               >
@@ -128,7 +130,7 @@ class Search extends Component {
           {searchSuccessful ? (
             <>
               <h3
-                className="d-flex justify-content-center pt-4 pb-3"
+                className="d-flex justify-content-center pt-4 pb-3 text-light"
               >
                 {searchAnswer}
               </h3>
@@ -145,7 +147,8 @@ class Search extends Component {
                     align-items-center
                     p-5
                     border
-                    rounded"
+                    rounded
+                    bg-light"
                   >
                     <Link
                       data-testid={ `link-to-album-${album.collectionId}` }
