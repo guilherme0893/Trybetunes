@@ -12,15 +12,12 @@ class Header extends Component {
     };
   }
 
-  // ao carregar o componenet no state 'zero'
   componentDidMount() {
     this.getUser();
   }
 
   getUser = () => {
-    // o getUser original vem de API, logo é um async
     getUser()
-    // lembrar que retorna um objeto
       .then((name) => this.setState({
         userName: name.name,
         loading: true,
@@ -33,7 +30,11 @@ class Header extends Component {
       loading,
     } = this.state;
     return (
-      <header data-testid="header-component">
+      <header
+        className="d-flex justify-content-center pt-5 pb-4 border-bottom"
+        style={ { color: 'white' } }
+        data-testid="header-component"
+      >
         { loading
           ? <h1 data-testid="header-user-name">{`Welcome, ${userName}!`}</h1>
           : <Loading />}

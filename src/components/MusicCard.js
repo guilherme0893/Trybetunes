@@ -23,10 +23,6 @@ class MusicCard extends Component {
     const { trackId } = this.props;
     getFavoriteSongs()
       .then((favorites) => {
-      // só chamar as musicas com o checked true
-        // console.log('sou a função de load dos favoritos!');
-        // console.log(favorites);
-        // trackId está no id e será como identifica a musica
         if (favorites.some((favorite) => favorite.trackId === trackId)) {
           this.setState({ isCheckBoxChecked: true });
         }
