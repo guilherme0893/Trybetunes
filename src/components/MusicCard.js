@@ -31,13 +31,10 @@ class MusicCard extends Component {
 
   handleOnCheckBoxClick = () => {
     const { trackId } = this.props;
-    // funcionalidade de remover vai entrar aqui, mas agora é uma pausa
-    // chamar os states, checar se ta true ou false e aplicar a logica de mudança com setstate
     this.setState({
       isCheckBoxChecked: true,
       onCheckBoxClick: true,
     }, () => {
-      // no addSong teoricamente entra a song
       addSong(trackId)
         .then(() => {
           this.setState({ onCheckBoxClick: false });
@@ -48,20 +45,32 @@ class MusicCard extends Component {
   render() {
     const { trackName, previewUrl, trackId } = this.props;
     const { isCheckBoxChecked, onCheckBoxClick } = this.state;
-    console.log(trackName);
     return (
-      <div>
+      <div
+        className="
+          // d-flex
+          // justify-content-center
+          // m-3
+          // p-3
+          // w-auto"
+      >
         {onCheckBoxClick
           ? (<Loading />)
           : (
-            <div>
+            <div
+              className="
+                d-flex border p-3 w-25
+                flex-column align-items-center"
+            >
               <span>{ trackName }</span>
-              <audio data-testid="audio-component" src={ previewUrl } controls>
-                <track kind="captions" />
-                O seu navegador não suporta o elemento
-                <code>audio</code>
-                .
-              </audio>
+              <div className="m-2">
+                <audio data-testid="audio-component" src={ previewUrl } controls>
+                  <track kind="captions" />
+                  O seu navegador não suporta o elemento
+                  <code>audio</code>
+                  .
+                </audio>
+              </div>
               <label htmlFor="trackId">
                 Favorita
                 <input
