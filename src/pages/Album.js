@@ -56,14 +56,20 @@ class Album extends Component {
       <div data-testid="page-album">
         {/* <Header /> */}
         <h1 className="d-flex justify-content-center pt-5 pb-4">
-          Results for { collectionName }
+          Results for
+          {
+            collectionName
+          }
         </h1>
         <div className="d-flex flex-row justify-content-center pt-5 pb-4">
           <img className="h-100" src={ artworkUrl100 } alt={ collectionName } />
           <div className="d-flex flex-column m-3 p-2">
             <h3 data-testid="artist-name">{ artistName }</h3>
             <h3>
-              Release year { novo }
+              Release year
+              {
+                novo
+              }
             </h3>
           </div>
         </div>
