@@ -31,7 +31,7 @@ class Header extends Component {
     } = this.state;
     return (
       <header
-        className="d-flex justify-content-center pt-5 pb-4 border"
+        className="d-flex justify-content-center pt-5 pb-4 border-bottom"
         style={ { color: 'white' } }
         data-testid="header-component"
       >

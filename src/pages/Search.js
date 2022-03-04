@@ -86,7 +86,10 @@ class Search extends Component {
       searchSuccessful,
     } = this.state;
     return (
-      <div style={ { background: 'black' } }>
+      <div
+        className="w-100 h-100"
+        style={ { backgroundColor: '#353B3C' } }
+      >
         <div data-testid="page-search">
           <Header />
           {searchButtonClick ? (
@@ -112,7 +115,7 @@ class Search extends Component {
               <div className="d-flex justify-content-center pb-3">
                 <Button
                   style={ {
-                    backgroundColor: 'rgb(0,0,139)',
+                    backgroundColor: '#846A6A',
                     padding: '10px',
                     color: 'white',
                     borderRadius: 4,
@@ -134,36 +137,38 @@ class Search extends Component {
               >
                 {searchAnswer}
               </h3>
-              {albumsReturned.map((album) => (
-                <div
-                  className="d-flex justify-content-center pb-4"
-                  key={ album.collectionId }
-                >
+              <div className="d-flex flex-wrap justify-content-around pb-4">
+                {albumsReturned.map((album) => (
                   <div
-                    style={ { width: '700px' } }
-                    className="
-                    d-flex
-                    flex-column
-                    align-items-center
-                    p-5
-                    border
-                    rounded
-                    bg-light"
+                    key={ album.collectionId }
                   >
-                    <Link
-                      data-testid={ `link-to-album-${album.collectionId}` }
-                      to={ `album/${album.collectionId}` }
+                    <div
+                      style={ { width: '500px', backgroundColor: '#C6C7C4' } }
+                      className="
+                      d-flex
+                      flex-column
+                      align-items-center
+                      m-3
+                      p-5
+                      border
+                      rounded"
+                      // bg-light"
                     >
-                      <div className="d-flex justify-content-center pb-3">
-                        <img src={ album.artworkUrl100 } alt={ album.collectionName } />
-                      </div>
-                      <div className="d-flex justify-content-center">
-                        <li>{album.collectionName}</li>
-                      </div>
-                    </Link>
+                      <Link
+                        data-testid={ `link-to-album-${album.collectionId}` }
+                        to={ `album/${album.collectionId}` }
+                      >
+                        <div className="d-flex justify-content-center pb-3">
+                          <img src={ album.artworkUrl100 } alt={ album.collectionName } />
+                        </div>
+                        <div className="d-flex justify-content-center">
+                          <li>{album.collectionName}</li>
+                        </div>
+                      </Link>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </>
           )
             : <span>{searchAnswer}</span>}
