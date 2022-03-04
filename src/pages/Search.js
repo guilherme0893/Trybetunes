@@ -85,6 +85,7 @@ class Search extends Component {
       searchButtonClick,
       searchSuccessful,
     } = this.state;
+    console.log(albumsReturned);
     return (
       <div
         className="w-100 h-100"
@@ -152,7 +153,6 @@ class Search extends Component {
                       p-5
                       border
                       rounded"
-                      // bg-light"
                     >
                       <Link
                         data-testid={ `link-to-album-${album.collectionId}` }
