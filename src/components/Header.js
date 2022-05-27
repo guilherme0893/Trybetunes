@@ -36,6 +36,7 @@ class Header extends Component {
             <AccountCircle />
           </IconButton>
           <Menu
+            open={ false }
             style={ { backgroundColor: 'white' } }
           >
             <MenuItem>

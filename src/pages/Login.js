@@ -11,7 +11,7 @@ function Login() {
   const history = useHistory();
 
   const {
-    login,
+    // login,
     setLogin,
     isButtonDisabled,
     setIsButtonDisabled,
@@ -24,8 +24,6 @@ function Login() {
       setIsButtonDisabled(false);
     }
   };
-
-  console.log(login);
 
   return (
     // loginButtonClicked
