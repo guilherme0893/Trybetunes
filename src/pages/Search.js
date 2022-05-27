@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-// import SearchComponent from '../components/SearchComponent';
 import Header from '../components/Header';
-import AlbumCard from '../components/AlbumCard';
+import Album from '../components/Album';
 // import Footer from '../components/Footer';
 
 class Search extends Component {
@@ -9,9 +8,7 @@ class Search extends Component {
     return (
       <div>
         <Header />
-        {/* <SearchComponent /> */}
-        <AlbumCard />
-        {/* <Footer /> */}
+        <Album />
       </div>
     );
   }

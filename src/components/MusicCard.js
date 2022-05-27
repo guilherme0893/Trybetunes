@@ -1,77 +1,79 @@
-import React, { Component } from 'react';
+/* eslint-disable react/jsx-max-depth */
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import Loading from '../Loading';
-import { addSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Checkbox from '@mui/material/Checkbox';
+import InputLabel from '@mui/material/InputLabel';
+import {
+  addSong,
+  // getFavoriteSongs,
+} from '../services/favoriteSongsAPI';
+import GlobalContext from '../context/GlobalContext';
 
-class MusicCard extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isCheckBoxChecked: false,
-      onCheckBoxClick: false,
-    };
-  }
+function MusicCard(props) {
+  const { trackName, previewUrl, trackId } = props;
 
-  componentDidMount() {
-    this.loadFavoritesSongs();
-  }
+  const {
+    setFavorite,
+  } = useContext(GlobalContext);
 
-  loadFavoritesSongs = () => {
-    const { trackId } = this.props;
-    getFavoriteSongs()
-      .then((favorites) => {
-        if (favorites.some((favorite) => favorite.trackId === trackId)) {
-          this.setState({ isCheckBoxChecked: true });
-        }
-      });
-  }
+  const handleOnCheckBoxClick = () => {
+    addSong(trackId);
+    setFavorite(true);
+  };
 
-  handleOnCheckBoxClick = () => {
-    const { trackId } = this.props;
-    this.setState({
-      isCheckBoxChecked: true,
-      onCheckBoxClick: true,
-    }, () => {
-      addSong(trackId)
-        .then(() => {
-          this.setState({ onCheckBoxClick: false });
-        });
-    });
-  }
+  // const loadFavoritesSongs = () => {
+  //   const { trackId } = this.props;
+  //   getFavoriteSongs()
+  //     .then((favorites) => {
+  //       if (favorites.some((favorite) => favorite.trackId === trackId)) {
+  //         this.setState({ isCheckBoxChecked: true });
+  //       }
+  //     });
+  // }
 
-  render() {
-    const { trackName, previewUrl, trackId } = this.props;
-    const { isCheckBoxChecked, onCheckBoxClick } = this.state;
-    return (
-      <div>
-        {onCheckBoxClick
-          ? (<Loading />)
-          : (
-            <div>
-              <span>{ trackName }</span>
-              <div>
-                <audio data-testid="audio-component" src={ previewUrl } controls>
-                  <track kind="captions" />
-                  O seu navegador não suporta o elemento
-                  <code>audio</code>
-                  .
-                </audio>
-              </div>
-              <label htmlFor="trackId">
-                Favorita
-                <input
-                  id={ trackId }
-                  type="checkbox"
-                  data-testid={ `checkbox-music-${trackId}` }
-                  checked={ isCheckBoxChecked }
-                  onChange={ this.handleOnCheckBoxClick }
-                />
-              </label>
-            </div>)}
-      </div>
-
-    );
-  }
+  return (
+    <Box>
+      <Card
+        sx={ {
+          maxWidth: 450,
+          maxHeight: 150,
+          m: 2,
+          boxShadow: 2,
+          display: 'column',
+          flexWrap: 'wrap',
+          alignContent: 'center',
+        } }
+      >
+        <CardContent sx={ { p: 2 } }>
+          <Typography sx={ { mb: 2, fontWeight: 'bold' } }>
+            { trackName }
+          </Typography>
+          <Box sx={ { display: 'flex' } }>
+            <audio data-testid="audio-component" src={ previewUrl } controls>
+              <track kind="captions" />
+              O seu navegador não suporta o elemento
+              <code>audio</code>
+              .
+            </audio>
+            <InputLabel htmlFor="trackId" sx={ { ml: 2 } }>
+              Favorite
+              <Checkbox
+                id={ trackId }
+                type="checkbox"
+                data-testid={ `checkbox-music-${trackId}` }
+                // checked={ setFavorite }
+                onChange={ handleOnCheckBoxClick }
+              />
+            </InputLabel>
+          </Box>
+        </CardContent>
+      </Card>
+    </Box>
+  );
 }
 
 MusicCard.propTypes = {

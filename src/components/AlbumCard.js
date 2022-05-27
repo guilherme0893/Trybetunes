@@ -1,55 +1,44 @@
-import React, { useContext } from 'react';
-// import PropTypes from 'prop-types';
-import { Box } from '@mui/material';
-// import Typography from '@mui/material/Typography';
-import Album from './Album';
-import GlobalContext from '../context/GlobalContext';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
 
-function AlbumCard() {
-  const {
-    album,
-  } = useContext(GlobalContext);
-
+function AlbumCard(props) {
+  const { albumId, albumCover, albumName } = props;
   return (
-    <Box
-      style={ {
-        marginTop: '100px',
+    <Card
+      sx={ {
+        maxWidth: 245,
+        m: 2,
+        boxShadow: 3,
       } }
     >
-      {album.length !== 0 ? (
-        <>
-          {/* <header
-            style={ { } }
-          >
-            <h3 sx={ { align: 'center' } }>
-              Results for
-              {' '}
-              {searchText}
-            </h3>
-          </header> */}
-          <Box
-            sx={ {
-              display: 'flex',
-              flexWrap: 'wrap',
-              justifyContent: 'center',
-            } }
-          >
-            {album.map((a) => (
-              <Album
-                key={ a.collectionId }
-                albumCover={ a.artworkUrl100 }
-                albumName={ a.collectionName }
-                albumId={ a.collectionId }
-                artistName={ a.artistName }
-              />
-            ))}
-          </Box>
-        </>
-      ) : (
-        <p style={ { marginTop: '40px' } }>No album found</p>
-      )}
-    </Box>
+      <Link
+        to={ `album/${albumId}` }
+        data-testid={ `link-to-album-${albumId}` }
+      >
+        <CardMedia
+          component="img"
+          height="250"
+          image={ albumCover }
+          alt={ albumName }
+        />
+        <CardContent>
+          <Typography>{ albumName }</Typography>
+        </CardContent>
+      </Link>
+    </Card>
   );
 }
 
 export default AlbumCard;
+
+AlbumCard.propTypes = {
+  albumId: PropTypes.number.isRequired,
+  albumCover: PropTypes.string.isRequired,
+  albumName: PropTypes.string.isRequired,
+  // artistName: PropTypes.string.isRequired,
+};

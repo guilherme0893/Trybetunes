@@ -19,6 +19,10 @@ const GlobalProvider = ({ children }) => {
 
   const [spiner, setSpiner] = useState(true);
 
+  const [music, setMusic] = useState([]);
+
+  const [favorite, setFavorite] = useState(false);
+
   const contextValues = {
     album,
     setAlbum,
@@ -36,6 +40,10 @@ const GlobalProvider = ({ children }) => {
     setSearchSuccessfull,
     spiner,
     setSpiner,
+    music,
+    setMusic,
+    favorite,
+    setFavorite,
   };
 
   return (

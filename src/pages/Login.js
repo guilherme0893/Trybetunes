@@ -11,7 +11,7 @@ function Login() {
   const history = useHistory();
 
   const {
-    // login,
+    login,
     setLogin,
     isButtonDisabled,
     setIsButtonDisabled,
@@ -20,10 +20,12 @@ function Login() {
   const handleLoginInput = ({ target }) => {
     const inputControl = 3;
     if (target.value.length > inputControl) {
-      setLogin(target.name);
+      setLogin(target.value);
       setIsButtonDisabled(false);
     }
   };
+
+  console.log(login);
 
   return (
     // loginButtonClicked
