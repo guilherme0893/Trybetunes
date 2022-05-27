@@ -10,9 +10,6 @@ class MusicCard extends Component {
       isCheckBoxChecked: false,
       onCheckBoxClick: false,
     };
-    // const {
-    //   trackId,
-    // } = this.props;
   }
 
   componentDidMount() {
