@@ -8,7 +8,6 @@ import GlobalContext from '../context/GlobalContext';
 function AlbumCard() {
   const {
     album,
-    // searchText,
   } = useContext(GlobalContext);
 
   return (
