@@ -14,7 +14,7 @@ This projects allows the user to search and listen to their favorite musics and 
 
 # Take a look at the application
 
-- the deploy will be available soon
+- https://keen-gelato-5c1f65.netlify.app/
 
 # Future updates
 
