@@ -32,10 +32,10 @@ class Album extends Component {
     getMusics(id)
       .then((music) => {
         this.setState({
-          artistName: music[0].artistName,
-          collectionName: music[0].collectionName,
-          artworkUrl100: music[0].artworkUrl100,
-          releaseYear: music[0].releaseDate,
+          artistName: music.artistName,
+          collectionName: music.collectionName,
+          artworkUrl100: music.artworkUrl100,
+          releaseYear: music.releaseDate,
         }, () => {
           this.setState({ songs: [...music] });
         });
@@ -54,22 +54,20 @@ class Album extends Component {
     const novo = releaseYear.substring(0, limit);
     return (
       <div data-testid="page-album">
-        {/* <Header /> */}
-        <h1 className="d-flex justify-content-center pt-5 pb-4">
+        <h1>
           Results for
-          {
-            collectionName
-          }
+          { collectionName }
         </h1>
-        <div className="d-flex flex-row justify-content-center pt-5 pb-4">
-          <img className="h-100" src={ artworkUrl100 } alt={ collectionName } />
-          <div className="d-flex flex-column m-3 p-2">
+        <div>
+          <img
+            src={ artworkUrl100 }
+            alt={ collectionName }
+          />
+          <div>
             <h3 data-testid="artist-name">{ artistName }</h3>
             <h3>
               Release year
-              {
-                novo
-              }
+              { novo }
             </h3>
           </div>
         </div>
