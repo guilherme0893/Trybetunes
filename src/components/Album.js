@@ -1,44 +1,54 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
+import React, { useContext } from 'react';
+import { Box } from '@mui/material';
+import AlbumCard from './AlbumCard';
+import GlobalContext from '../context/GlobalContext';
 
-function Album(props) {
-  const { albumId, albumCover, albumName } = props;
+function Album() {
+  const {
+    album,
+    searchText,
+  } = useContext(GlobalContext);
+
   return (
-    <Card
-      sx={ {
-        maxWidth: 245,
-        m: 2,
-        boxShadow: 3,
+    <Box
+      style={ {
+        marginTop: '100px',
       } }
     >
-      <Link
-        to={ `album/${albumId}` }
-        data-testid={ `link-to-album-${albumId}` }
-      >
-        <CardMedia
-          component="img"
-          height="250"
-          image={ albumCover }
-          alt={ albumName }
-        />
-        <CardContent>
-          <Typography>{ albumName }</Typography>
-        </CardContent>
-      </Link>
-    </Card>
+      {album.length !== 0 ? (
+        <Box>
+          <header
+            style={ { textAlign: 'center' } }
+          >
+            <h3 sx={ { } }>
+              Results for
+              {' '}
+              {searchText}
+            </h3>
+          </header>
+          <Box
+            sx={ {
+              display: 'flex',
+              flexWrap: 'wrap',
+              justifyContent: 'center',
+            } }
+          >
+            {album.map((a) => (
+              <AlbumCard
+                key={ a.collectionId }
+                albumCover={ a.artworkUrl100 }
+                albumName={ a.collectionName }
+                albumId={ a.collectionId }
+                artistName={ a.artistName }
+              />
+            ))}
+          </Box>
+        </Box>
+      ) : (
+        <h3 style={ { textAlign: 'center' } }>No album found</h3>
+      )}
+    </Box>
   );
 }
 
 export default Album;
-
-Album.propTypes = {
-  albumId: PropTypes.number.isRequired,
-  albumCover: PropTypes.string.isRequired,
-  albumName: PropTypes.string.isRequired,
-  // artistName: PropTypes.string.isRequired,
-};

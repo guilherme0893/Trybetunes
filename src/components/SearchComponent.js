@@ -10,7 +10,6 @@ function SearchComponent() {
   const {
     isButtonDisabled,
     setIsButtonDisabled,
-    album,
     setAlbum,
     searchText,
     setSearchText,
@@ -32,7 +31,6 @@ function SearchComponent() {
       .then((response) => {
         setAlbum(response);
       });
-    console.log(album);
   };
 
   return (

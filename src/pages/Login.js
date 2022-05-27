@@ -20,7 +20,7 @@ function Login() {
   const handleLoginInput = ({ target }) => {
     const inputControl = 3;
     if (target.value.length > inputControl) {
-      setLogin(target.name);
+      setLogin(target.value);
       setIsButtonDisabled(false);
     }
   };
