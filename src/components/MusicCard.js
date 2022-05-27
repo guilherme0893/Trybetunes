@@ -47,23 +47,25 @@ class MusicCard extends Component {
     const { isCheckBoxChecked, onCheckBoxClick } = this.state;
     return (
       <div
-        className="
-          // d-flex
-          // justify-content-center
-          // m-3
-          // p-3
-          // w-auto"
+        // className="
+        //   // d-flex
+        //   // justify-content-center
+        //   // m-3
+        //   // p-3
+        //   // w-auto"
       >
         {onCheckBoxClick
           ? (<Loading />)
           : (
             <div
-              className="
-                d-flex border p-3 w-25
-                flex-column align-items-center"
+              // className="
+              //   d-flex border p-3 w-25
+              //   flex-column align-items-center"
             >
               <span>{ trackName }</span>
-              <div className="m-2">
+              <div
+                // className="m-2"
+              >
                 <audio data-testid="audio-component" src={ previewUrl } controls>
                   <track kind="captions" />
                   O seu navegador não suporta o elemento
