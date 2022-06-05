@@ -18,6 +18,8 @@ This projects allows the user to search and listen to their favorite musics and 
 
 # Future updates
 
+- Improve the responsive layout
+- Add the loading spinner
 - Style the albums details
 - Create the option to make a song favorite
 - Create the user profile page
