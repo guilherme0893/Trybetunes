@@ -15,7 +15,6 @@ import GlobalContext from '../context/GlobalContext';
 
 function MusicCard(props) {
   const { trackName, previewUrl, trackId } = props;
-
   const {
     setFavorite,
   } = useContext(GlobalContext);
