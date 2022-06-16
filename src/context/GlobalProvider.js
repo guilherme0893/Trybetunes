@@ -5,6 +5,8 @@ import GlobalContext from './GlobalContext';
 const GlobalProvider = ({ children }) => {
   const [login, setLogin] = useState('');
 
+  const [password, setPassword] = useState('');
+
   const [album, setAlbum] = useState([]);
 
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
@@ -32,6 +34,8 @@ const GlobalProvider = ({ children }) => {
     setAlbum,
     login,
     setLogin,
+    password,
+    setPassword,
     isButtonDisabled,
     setIsButtonDisabled,
     search,
