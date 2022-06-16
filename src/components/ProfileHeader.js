@@ -3,13 +3,12 @@ import { useHistory } from 'react-router-dom';
 import { Toolbar, AppBar } from '@mui/material/';
 import AudiotrackIcon from '@mui/icons-material/Audiotrack';
 import IconButton from '@mui/material/IconButton';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import SearchComponent from './SearchComponent';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
-function Header() {
+function ProfileHeader() {
   const history = useHistory();
-  const onProfileButtonClick = () => {
-    history.push('/profile');
+  const onBackButtonClick = () => {
+    history.push('/search');
   };
   return (
     <AppBar
@@ -26,19 +25,19 @@ function Header() {
         } }
       >
         <AudiotrackIcon style={ { fontSize: 60 } } />
-        <SearchComponent />
+        <h1>Profile</h1>
         <IconButton
           style={ {
             fontSize: 60,
             backgroundColor: 'white',
           } }
-          onClick={ onProfileButtonClick }
+          onClick={ onBackButtonClick }
         >
-          <AccountCircle />
+          <ArrowBackIcon />
         </IconButton>
       </Toolbar>
     </AppBar>
   );
 }
 
-export default Header;
+export default ProfileHeader;
