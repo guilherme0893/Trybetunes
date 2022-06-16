@@ -7,14 +7,17 @@ function FavoriteComponent() {
     padding: 20,
     height: '70vh',
     width: 480,
-    marginTop: '120px',
     margin: '20px auto',
     display: 'flex',
     justifyContent: 'center',
   };
 
+  const gridStyle = {
+    marginTop: '150px',
+  };
+
   return (
-    <Grid>
+    <Grid style={ gridStyle }>
       <Paper
         elevation={ 20 }
         style={ paperStyle }
