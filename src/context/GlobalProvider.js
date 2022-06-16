@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import GlobalContext from './GlobalContext';
+import useLocalStorage from '../hooks/saveToLocalStorage';
 
 const GlobalProvider = ({ children }) => {
   const [login, setLogin] = useState('');
@@ -29,6 +30,11 @@ const GlobalProvider = ({ children }) => {
 
   const [artistName, setArtistName] = useState('');
 
+  const [
+    sendToLocalStorage,
+    setSendToLocalStorage,
+  ] = useLocalStorage('favoriteSongs', []);
+
   const contextValues = {
     album,
     setAlbum,
@@ -56,6 +62,8 @@ const GlobalProvider = ({ children }) => {
     setSearched,
     artistName,
     setArtistName,
+    sendToLocalStorage,
+    setSendToLocalStorage,
   };
 
   return (
