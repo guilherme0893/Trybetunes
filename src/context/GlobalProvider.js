@@ -23,6 +23,10 @@ const GlobalProvider = ({ children }) => {
 
   const [favorite, setFavorite] = useState(false);
 
+  const [searched, setSearched] = useState(false);
+
+  const [artistName, setArtistName] = useState('');
+
   const contextValues = {
     album,
     setAlbum,
@@ -44,6 +48,10 @@ const GlobalProvider = ({ children }) => {
     setMusic,
     favorite,
     setFavorite,
+    searched,
+    setSearched,
+    artistName,
+    setArtistName,
   };
 
   return (

@@ -15,6 +15,8 @@ function SearchComponent() {
     setSearchText,
     spiner,
     setSpiner,
+    setSearched,
+    setArtistName,
   } = useContext(GlobalContext);
 
   const handleSearchInput = ({ target }) => {
@@ -31,6 +33,9 @@ function SearchComponent() {
       .then((response) => {
         setAlbum(response);
       });
+    setArtistName(searchText);
+    setSearched(true);
+    setSearchText('');
   };
 
   return (

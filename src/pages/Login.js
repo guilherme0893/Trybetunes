@@ -1,17 +1,17 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router';
-import { Button, Typography, Input, InputLabel, Box, Stack } from '@mui/material';
+import {
+  Button, Typography, Input, InputLabel, Grid, Paper, Link } from '@mui/material';
+
+import AudiotrackIcon from '@mui/icons-material/Audiotrack';
 import LoginIcon from '@mui/icons-material/Login';
 import GlobalContext from '../context/GlobalContext';
-// import PersonIcon from '@mui/icons-material/Person';
-// import Spinner from 'react-bootstrap/Spinner';
-// import { createUser } from '../services/userAPI';
 
 function Login() {
   const history = useHistory();
 
   const {
-    login,
     setLogin,
     isButtonDisabled,
     setIsButtonDisabled,
@@ -25,38 +25,81 @@ function Login() {
     }
   };
 
-  console.log(login);
+  const paperStyle = {
+    padding: 20,
+    height: '70vh',
+    width: 370,
+    margin: '20px auto',
+  };
+
+  const buttonStyle = {
+    marginTop: '15px',
+    marginBottom: '30px',
+  };
+
+  const contentGridStyle = {
+    display: 'flex',
+    flexDirection: 'column',
+    marginTop: '80px',
+  };
+
+  const titleGridStyle = {
+    margin: 'auto',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  };
+
+  const iconStyle = {
+    margin: 'auto',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontSize: 120,
+  };
 
   return (
-    // loginButtonClicked
-    //   ? this.redirectValidation()
-    //   : (
-    <Box>
-      <Stack
-        direction="row"
-        spacing={ 10 }
-        justifyContent="center"
-        alignItems="center"
-        minHeight="100vh"
+    <Grid>
+      <Paper
+        elevation={ 20 }
+        style={ paperStyle }
       >
-        <Typography variant="h1" component="h1">
-          TrybeTunes
-        </Typography>
-        <Box style={ { display: 'flex-column' } }>
+        <Grid style={ titleGridStyle }>
+          <Typography variant="h2" component="h2">
+            TrybeTunes
+          </Typography>
+        </Grid>
+        <AudiotrackIcon
+          style={ iconStyle }
+        />
+        <Grid style={ contentGridStyle }>
           <InputLabel
             htmlFor="login-name-input"
           >
             <Input
-              // inputProps={ ariaLabel }
+              fullWidth
+              required
               data-testid="login-name-input"
               type="text"
               placeholder="user@email.com"
               onChange={ handleLoginInput }
             />
           </InputLabel>
-          <Button
+          <InputLabel
             style={ { marginTop: '15px' } }
-            padding="1"
+            htmlFor="login-password-input"
+          >
+            <Input
+              fullWidth
+              required
+              data-testid="login-password-input"
+              type="password"
+              placeholder="*****"
+              onChange={ handleLoginInput }
+            />
+          </InputLabel>
+          <Button
+            style={ buttonStyle }
             variant="contained"
             startIcon={ <LoginIcon /> }
             type="submit"
@@ -66,117 +109,15 @@ function Login() {
           >
             Entrar
           </Button>
-        </Box>
-      </Stack>
-    </Box>
+          <Typography style={ { } }>
+            <Link>
+              Forgot password ?
+            </Link>
+          </Typography>
+        </Grid>
+      </Paper>
+    </Grid>
   );
 }
-
-// class Login extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       userLogin: '',
-//       loading: false,
-//       isButtonDisabled: true,
-//       loginButtonClicked: false,
-//     };
-//   }
-
-//   onInputUserChange = (event) => {
-//     const { value } = event.target;
-//     this.setState({
-//       userLogin: value,
-//     }, () => {
-//       this.buttonValidationOnInput();
-//     });
-//   }
-
-//   buttonValidationOnInput= () => {
-//     const { userLogin } = this.state;
-//     const inputControl = 3;
-//     if (userLogin.length >= inputControl) {
-//       return this.setState({ isButtonDisabled: false });
-//     } return this.setState({ isButtonDisabled: true });
-//   }
-
-//   onLoginButtonCLick = () => {
-//     const {
-//       userLogin,
-//     } = this.state;
-
-//     this.setState({
-//       loginButtonClicked: true,
-//     });
-//     const userName = { name: userLogin };
-//     createUser(userName)
-//       .then(() => this.setState({ loading: true }));
-//   }
-
-//   redirectValidation = () => {
-//     const { loading } = this.state;
-//     if (loading) return <Redirect to="/search" />;
-//     return (
-//       <Spinner animation="border" role="status">
-//         <span className="visually-hidden">Loading...</span>
-//       </Spinner>
-//     );
-//   }
-
-//   render() {
-//     const {
-//       isButtonDisabled,
-//       loginButtonClicked,
-//     } = this.state;
-
-//     const ariaLabel = { 'aria-label': 'description' };
-
-//     return (
-//       loginButtonClicked
-//         ? this.redirectValidation()
-//         : (
-//           <Box>
-//             <Stack
-//               direction="row"
-//               spacing={ 10 }
-//               justifyContent="center"
-//               alignItems="center"
-//               minHeight="100vh"
-//             >
-//               <Typography variant="h1" component="h1">
-//                 TrybeTunes
-//               </Typography>
-//               <Box style={ { display: 'flex-column' } }>
-//                 <InputLabel
-//                   htmlFor="login-name-input"
-//                 >
-//                   <Input
-//                     inputProps={ ariaLabel }
-//                     data-testid="login-name-input"
-//                     type="text"
-//                     name="userLogin"
-//                     placeholder="user@email.com"
-//                     onChange={ this.onInputUserChange }
-//                   />
-//                 </InputLabel>
-//                 <Button
-//                   style={ { marginTop: '15px' } }
-//                   padding="1"
-//                   variant="contained"
-//                   startIcon={ <LoginIcon /> }
-//                   type="submit"
-//                   data-testid="login-submit-button"
-//                   onClick={ this.onLoginButtonCLick }
-//                   disabled={ isButtonDisabled }
-//                 >
-//                   Entrar
-//                 </Button>
-//               </Box>
-//             </Stack>
-//           </Box>
-//         )
-//     );
-//   }
-// }
 
 export default Login;
