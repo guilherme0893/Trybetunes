@@ -17,7 +17,9 @@ function AlbumResult() {
       } }
     >
       {
-        album.length !== 0 ? (
+        album.length === 0 || !album ? (
+          <h3 style={ { textAlign: 'center' } }>No album found</h3>
+        ) : (
           <Box>
             <header
               style={ { textAlign: 'center' } }
@@ -46,8 +48,6 @@ function AlbumResult() {
               ))}
             </Box>
           </Box>
-        ) : (
-          <h3 style={ { textAlign: 'center' } }>No album found</h3>
         )
       }
     </Box>
