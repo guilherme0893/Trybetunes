@@ -8,7 +8,7 @@ import CardContent from '@mui/material/CardContent';
 import FavoriteCheckbox from './FavoriteCheckbox';
 
 function MusicCard(props) {
-  const { trackName, previewUrl } = props;
+  const { trackName, previewUrl, trackId } = props;
 
   return (
     <Box>
@@ -34,7 +34,7 @@ function MusicCard(props) {
               <code>audio</code>
               .
             </audio>
-            <FavoriteCheckbox />
+            <FavoriteCheckbox id={ trackId } />
           </Box>
         </CardContent>
       </Card>
@@ -45,6 +45,7 @@ function MusicCard(props) {
 MusicCard.propTypes = {
   trackName: PropTypes.string.isRequired,
   previewUrl: PropTypes.string.isRequired,
+  trackId: PropTypes.number.isRequired,
 };
 
 export default MusicCard;

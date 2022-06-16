@@ -26,7 +26,7 @@ function Music() {
 
   useEffect(() => {
     fetchMusics();
-  });
+  }, []);
 
   return (
     <Box data-testid="page-album" sx={ { } }>
@@ -35,7 +35,9 @@ function Music() {
           <CircularProgress />
         ) : (
           <>
-            <Box sx={ { justifyContent: 'center', backgroundColor: '' } }>
+            <Box
+              sx={ { justifyContent: 'center' } }
+            >
               <Typography variant="h2" sx={ { mb: 3 } }>
                 Results for
                 {' '}
