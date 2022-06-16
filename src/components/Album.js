@@ -11,8 +11,6 @@ function Album() {
     artistName,
   } = useContext(GlobalContext);
 
-  // console.log(album);
-
   return (
     <Box
       style={ {
