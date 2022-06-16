@@ -12,18 +12,31 @@ function Login() {
   const history = useHistory();
 
   const {
+    login,
     setLogin,
     isButtonDisabled,
     setIsButtonDisabled,
+    password,
+    setPassword,
   } = useContext(GlobalContext);
 
   const handleLoginInput = ({ target }) => {
     const inputControl = 3;
     if (target.value.length > inputControl) {
       setLogin(target.value);
-      setIsButtonDisabled(false);
     }
   };
+
+  const handlePasswordInput = ({ target }) => {
+    const passwordControl = 6;
+    if (target.value.length >= passwordControl) {
+      setPassword(target.value);
+    }
+  };
+
+  if (login !== '' && password !== '') {
+    setIsButtonDisabled(false);
+  }
 
   const paperStyle = {
     padding: 20,
@@ -95,7 +108,7 @@ function Login() {
               data-testid="login-password-input"
               type="password"
               placeholder="*****"
-              onChange={ handleLoginInput }
+              onChange={ handlePasswordInput }
             />
           </InputLabel>
           <Button
