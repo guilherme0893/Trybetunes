@@ -57,7 +57,6 @@ function Login() {
   };
 
   const titleGridStyle = {
-    margin: 'auto',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -69,10 +68,16 @@ function Login() {
     justifyContent: 'center',
     alignItems: 'center',
     fontSize: 120,
+    marginTop: '25px',
+  };
+
+  const mainGrid = {
+    display: 'flex',
+    width: 'auto',
   };
 
   return (
-    <Grid>
+    <Grid style={ mainGrid }>
       <Paper
         elevation={ 20 }
         style={ paperStyle }
@@ -122,7 +127,7 @@ function Login() {
           >
             Entrar
           </Button>
-          <Typography style={ { } }>
+          <Typography>
             <Link>
               Forgot password ?
             </Link>
