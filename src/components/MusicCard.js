@@ -11,16 +11,17 @@ function MusicCard(props) {
   const { trackName, previewUrl, trackId } = props;
 
   return (
-    <Box>
+    <Box
+      sx={ {
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+      } }
+    >
       <Card
         sx={ {
-          maxWidth: 450,
-          maxHeight: 180,
           m: 2,
           boxShadow: 2,
-          display: 'column',
-          flexWrap: 'wrap',
-          alignContent: 'center',
         } }
       >
         <CardContent sx={ { p: 2 } }>

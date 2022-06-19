@@ -12,7 +12,7 @@ function SearchComponent() {
     setAlbum,
     searchText,
     setSearchText,
-    setSpiner,
+    setSpinner,
     setSearched,
     setArtistName,
   } = useContext(GlobalContext);
@@ -26,14 +26,14 @@ function SearchComponent() {
   };
 
   const onSearchButtonClick = () => {
-    setSpiner(true);
+    setSpinner(true);
     searchAlbumsAPI(searchText)
       .then((response) => {
         setAlbum(response);
       });
+    setSpinner(false);
     setArtistName(searchText);
     setSearched(true);
-    setSearchText('');
   };
 
   return (

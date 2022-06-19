@@ -20,7 +20,7 @@ const GlobalProvider = ({ children }) => {
 
   const [searchSuccessfull, setSearchSuccessfull] = useState(false);
 
-  const [spiner, setSpiner] = useState(true);
+  const [spinner, setSpinner] = useState(false);
 
   const [music, setMusic] = useState([]);
 
@@ -29,6 +29,8 @@ const GlobalProvider = ({ children }) => {
   const [searched, setSearched] = useState(false);
 
   const [artistName, setArtistName] = useState('');
+
+  const [albumName, setAlbumName] = useState('');
 
   const [
     sendToLocalStorage,
@@ -52,8 +54,8 @@ const GlobalProvider = ({ children }) => {
     setSearchText,
     searchSuccessfull,
     setSearchSuccessfull,
-    spiner,
-    setSpiner,
+    spinner,
+    setSpinner,
     music,
     setMusic,
     favorite,
@@ -64,6 +66,8 @@ const GlobalProvider = ({ children }) => {
     setArtistName,
     sendToLocalStorage,
     setSendToLocalStorage,
+    albumName,
+    setAlbumName,
   };
 
   return (

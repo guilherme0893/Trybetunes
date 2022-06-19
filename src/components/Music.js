@@ -1,11 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useState } from 'react';
-import { Box, Typography } from '@mui/material';
-import CircularProgress from '@mui/material/CircularProgress';
+import { Box } from '@mui/material';
+import LinearProgress from '@mui/material/LinearProgress';
 import { useParams } from 'react-router-dom';
 import getMusics from '../services/musicsAPI';
 import GlobalContext from '../context/GlobalContext';
 import MusicCard from './MusicCard';
+import MusicHeader from './MusicHeader';
 
 function Music() {
   const { id } = useParams();
@@ -30,28 +31,24 @@ function Music() {
 
   return (
     <Box data-testid="page-album" sx={ { } }>
+      <MusicHeader />
       {
         music.length === 0 || artistName === '' || !artistName ? (
-          <CircularProgress />
+          <LinearProgress />
         ) : (
           <>
             <Box
               sx={ { justifyContent: 'center' } }
-            >
-              <Typography variant="h2" sx={ { mb: 3 } }>
-                Results for
-                {' '}
-                { artistName }
-              </Typography>
-            </Box>
-            <Box
-              sx={ {
-                display: 'flex',
-                flexDirection: 'row',
-                flexWrap: 'wrap',
-                justifyContent: 'center',
+              style={ {
+                marginTop: '100px',
               } }
             >
+              {/* <Typography variant="h4" sx={ { mb: 3 } }>
+                Results for
+                {' '}
+              </Typography> */}
+            </Box>
+            <Box>
               {music.map((song, index) => (
                 index === 0
                   ? null

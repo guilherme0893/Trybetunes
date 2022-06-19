@@ -12,12 +12,16 @@ function FavoriteComponent() {
     justifyContent: 'center',
   };
 
-  const gridStyle = {
-    marginTop: '150px',
+  const mainGrid = {
+    display: 'flex',
+    width: 'auto',
+    marginTop: '100px',
   };
 
   return (
-    <Grid style={ gridStyle }>
+    <Grid
+      style={ mainGrid }
+    >
       <Paper
         elevation={ 20 }
         style={ paperStyle }

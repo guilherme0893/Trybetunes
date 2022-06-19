@@ -17,8 +17,9 @@ function Album() {
     >
       {
         !searched ? (
-          <>
-          </>
+          <h3 style={ { textAlign: 'center' } }>
+            Search and have a surprise!
+          </h3>
         )
           : (
             <AlbumResult />
