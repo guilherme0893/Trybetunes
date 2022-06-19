@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Login from '../pages/Login';
-import Search from '../pages/Search';
+import Home from '../pages/Home';
 import AlbumDetails from '../pages/AlbumDetails';
 import Profile from '../pages/Profile';
 import ProfileEdit from '../pages/ProfileEdit';
@@ -13,7 +13,7 @@ class Routes extends Component {
       <div>
         <Switch>
           <Route exact path="/" component={ Login } />
-          <Route exact path="/search" component={ Search } />
+          <Route exact path="/search" component={ Home } />
           <Route exact path="/album/:id" component={ AlbumDetails } />
           <Route exact path="/profile" component={ Profile } />
           <Route exact path="/profile/edit" component={ ProfileEdit } />
