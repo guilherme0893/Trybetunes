@@ -18,5 +18,6 @@ This projects allows the user to search and listen to their favorite musics and 
 
 # Future updates
 
-- Create the option to make a song favorite
-- Create the user profile page and load favorite songs
+- Fix the local storage bug
+
+- Create the option to make a song favorite and load it in the profile
