@@ -1,6 +1,6 @@
 # Introduction
 
-This projects allows the user to search and listen to their favorite musics and artists. Here an API from ITunes is used, and the data is displayed in the front-end using React and Material UI for styling. 
+This projects allows the user to search and listen to their favorite musics and artists. Here an API from ITunes is used -- for the musics the endpoit is (https://itunes.apple.com/lookup?id=${id}&entity=song), and for the albums the endpoint (https://itunes.apple.com/search?entity=album&term=${artistNameURL}&attribute=allArtistTerm), and the data is displayed in the front-end using React and Material UI for styling. For the artists, the following url is used 
 
 # How to use it 
    
