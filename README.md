@@ -14,7 +14,7 @@ This projects allows the user to search and listen to their favorite musics and 
 
 # Take a look at the application
 
-- https://keen-gelato-5c1f65.netlify.app/
+https://trybetunes-alpha.vercel.app/
 
 # Future updates
 
