@@ -1,17 +1,23 @@
-# Habilidades
+# Introduction
 
-  * Fazer requisições e consumir dados vindos de uma `API`;
+This projects allows the user to search and listen to their favorite musics and artists. Here an API from ITunes is used -- for the musics the endpoit is (https://itunes.apple.com/lookup?id=${id}&entity=song), and for the albums the endpoint (https://itunes.apple.com/search?entity=album&term=${artistNameURL}&attribute=allArtistTerm), and the data is displayed in the front-end using React and Material UI for styling. Please, notice that it is possible that the request of a certain artist may fail due to the API (then you will be redirect to a Not Found page), or it is possible that searched artist is not part of the ITunes API.
 
-  * Utilizar os ciclos de vida de um componente React;
+# How to use it 
+   
+1) First of all clone the repository via <code> git clone </code>  and enter into the folder 
 
-  * Utilizar a função `setState` de forma a garantir que um determinado código só é executado após o estado ser atualizado
-  
-  * Utilizar o componente `BrowserRouter` corretamente;
+2) Then install the dependencies via <code> npm install </code>
 
-  * Criar rotas, mapeando o caminho da URL com o componente correspondente, via `Route`;
+3) To run the application simply run <code> npm start </code>
 
-  * Utilizar o `Switch` do `React Router`
+4) Have fun
 
-  * Usar o componente `Redirect` pra redirecionar para uma rota específica;
+# Take a look at the application
 
-  * Criar links de navegação na aplicação com o componente `Link`;
+https://trybetunes-alpha.vercel.app/
+
+# Future updates
+
+- Fix the local storage bug
+
+- Create the option to make a song favorite and load it in the profile
